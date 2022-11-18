@@ -1,5 +1,10 @@
 {
     "cSpell.words": [
         "dtos"
-    ]
+    ],
+    "cSpell.ignorePaths": [
+        "src/common/data/**",
+        "node_modules",
+        "dist"
+    ],
 }

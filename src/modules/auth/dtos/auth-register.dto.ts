@@ -7,7 +7,7 @@ export class AuthRegisterDto {
 
   @IsNotEmpty()
   lastName: string;
-  
+
   @IsEmail()
   @Validate(IsUserAlreadyExistsRule)
   email: string;

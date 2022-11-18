@@ -1,27 +1,19 @@
-import { UserModule } from '@modules/user/user.module';
 import { Module } from '@nestjs/common';
+import { AuthModule } from '@modules/auth/auth.module';
+import { MunicipalityModule } from '@modules/municipality/municipality.module';
+import { ParishModule } from '@modules/parish/parish.module';
+import { StateModule } from '@modules/state/state.module';
+import { UserModule } from '@modules/user/user.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { AuthModule } from '@modules/auth/auth.module';
-import { ConfigModule, ConfigService } from '@nestjs/config';
-import { TypeOrmModule } from '@nestjs/typeorm';
+import { DatabaseModule } from './database/database.module';
+
 @Module({
   imports: [
-    ConfigModule.forRoot({}),
-    TypeOrmModule.forRootAsync({
-      imports: [ConfigModule],
-      inject: [ConfigService],
-      useFactory: (configService: ConfigService) => ({
-        type: 'postgres',
-        host: configService.get('DATABASE_HOST'),
-        port: configService.get('DATABASE_PORT'),
-        username: configService.get('DATABASE_USERNAME'),
-        password: configService.get('DATABASE_PASSWORD'),
-        database: configService.get('DATABASE_NAME'),
-        entities: [__dirname + '/modules/**/*.entity{.ts,.js}'],
-        synchronize: true,
-      }),
-    }),
+    DatabaseModule,
+    StateModule,
+    ParishModule,
+    MunicipalityModule,
     UserModule,
     AuthModule,
   ],
