@@ -1,6 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { UserService } from '@/modules/user/user.service';
-import { createManyUserFakers } from '../factories/user.faker';
+//import { createManyUserFakers } from '../factories/user.faker';
 
 @Injectable()
 export class UserSeeder {
@@ -20,7 +20,7 @@ export class UserSeeder {
       });
   }
   async handle() {
-    const users = createManyUserFakers(10);
+    /*   const users = createManyUserFakers(10);
     for (const user of users) {
       await this.userService.create(
         user.email,
@@ -28,6 +28,6 @@ export class UserSeeder {
         user.firstName,
         user.lastName,
       );
-    }
+    } */
   }
 }

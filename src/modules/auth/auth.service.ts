@@ -4,6 +4,7 @@ import { UserService } from '@modules/user/user.service';
 import { User } from '../user/user.entity';
 import { AuthLoginDto } from './dtos/auth-login.dto';
 import { AuthRegisterDto } from './dtos/auth-register.dto';
+import { UpdateProfileDto } from './dtos/update-profile.dto';
 import { AuthUserInterface } from './interfaces/auth-user.interface';
 
 @Injectable()
@@ -32,6 +33,12 @@ export class AuthService {
   }
 
   //? Methods
+  async getUserProfile(userId: number): Promise<Partial<AuthUserInterface>> {
+    const user = await this.usersService.find(userId);
+    return {
+      info: user,
+    };
+  }
 
   async login(authLoginDto: AuthLoginDto): Promise<any> {
     const user = await this.validateUser(
@@ -44,13 +51,32 @@ export class AuthService {
     throw new UnauthorizedException();
   }
 
-  async register(authLoginDto: AuthRegisterDto): Promise<any> {
+  async register(authRegisterDto: AuthRegisterDto): Promise<any> {
     const user = await this.usersService.create(
-      authLoginDto.email,
-      authLoginDto.password,
-      authLoginDto.firstName,
-      authLoginDto.lastName,
+      authRegisterDto.email,
+      authRegisterDto.password,
+      authRegisterDto.firstName,
+      authRegisterDto.lastName,
+      authRegisterDto.dni,
+      authRegisterDto.birthDate,
+      authRegisterDto.parishId,
     );
     return this.getAuthUser(user);
+  }
+
+  async update(
+    userId: number,
+    authUpdateProfile: UpdateProfileDto,
+  ): Promise<any> {
+    await this.usersService.update(userId, {
+      firstName: authUpdateProfile.firstName,
+      lastName: authUpdateProfile.lastName,
+      birthDate: authUpdateProfile.birthDate,
+      parish: { id: authUpdateProfile.parishId },
+      address: authUpdateProfile.address,
+      phone: authUpdateProfile.phone,
+    });
+
+    return this.getUserProfile(userId);
   }
 }

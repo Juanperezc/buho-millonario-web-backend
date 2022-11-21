@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { ParishService } from './parish.service';
 
 @Controller('parish')
@@ -8,5 +8,10 @@ export class ParishController {
   @Get()
   getAll() {
     return this.parishService.findAll();
+  }
+
+  @Get('by-municipality/:municipalityId')
+  getAllByMunicipalityId(@Param('municipalityId') municipalityId: number) {
+    return this.parishService.findByMunicipalityId(municipalityId);
   }
 }

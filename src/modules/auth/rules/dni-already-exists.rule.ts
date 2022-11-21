@@ -5,19 +5,19 @@ import {
 } from 'class-validator';
 import { UserService } from '@/modules/user/user.service';
 
-@ValidatorConstraint({ name: 'IsUserAlreadyExistsRule', async: false })
+@ValidatorConstraint({ name: 'IsDniAlreadyExists', async: false })
 @Injectable()
-export class IsUserAlreadyExistsRule implements ValidatorConstraintInterface {
+export class IsDniAlreadyExists implements ValidatorConstraintInterface {
   constructor(private readonly userService: UserService) {}
 
   async validate(email: string) {
-    const user = await this.userService.findOneByEmail(email);
+    const user = await this.userService.findOneByDni(email);
     if (user) return false;
     return true;
   }
 
   defaultMessage() {
     // here you can provide default error message if validation failed
-    return 'El email $value ya existe.';
+    return 'La cédula $value ya existe.';
   }
 }

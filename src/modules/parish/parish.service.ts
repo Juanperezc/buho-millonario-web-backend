@@ -13,4 +13,14 @@ export class ParishService {
   async findAll(): Promise<Parish[]> {
     return this.parishRepository.find();
   }
+
+  async findByMunicipalityId(municipalityId: number): Promise<Parish[]> {
+    return this.parishRepository.find({
+      where: {
+        municipality: {
+          id: municipalityId,
+        },
+      },
+    });
+  }
 }

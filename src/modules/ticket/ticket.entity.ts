@@ -3,26 +3,28 @@ import {
   CreateDateColumn,
   Entity,
   ManyToOne,
-  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { Municipality } from '@modules/municipality/municipality.entity';
+import { LittleAnimal } from '@modules/little-animal/little-animal.entity';
 import { User } from '@modules/user/user.entity';
 
 @Entity()
-export class Parish {
+export class Ticket {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
-  name: string;
+  code: string;
 
-  @ManyToOne(() => Municipality, (municipality) => municipality.parishes)
-  municipality: Municipality;
+  @Column()
+  amount: number;
 
-  @OneToMany(() => User, (user) => user.parish)
-  users: User[];
+  @ManyToOne(() => User, (user) => user.tickets)
+  user: User;
+
+  @ManyToOne(() => LittleAnimal, (littleAnimal) => littleAnimal.tickets)
+  littleAnimal: LittleAnimal;
 
   @CreateDateColumn({ name: 'created_at', type: 'timestamp with time zone' })
   createdAt: Date;

@@ -13,4 +13,14 @@ export class MunicipalityService {
   async findAll(): Promise<Municipality[]> {
     return this.municipalityRepository.find();
   }
+
+  async findAllByStateId(stateId: number): Promise<Municipality[]> {
+    return this.municipalityRepository.find({
+      where: {
+        state: {
+          id: stateId,
+        },
+      },
+    });
+  }
 }
