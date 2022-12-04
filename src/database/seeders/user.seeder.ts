@@ -20,7 +20,7 @@ export class UserSeeder {
       });
   }
   async handle() {
-    const users = createManyUserFakers(10);
+    const users = createManyUserFakers(50);
     for (const user of users) {
       await this.userService.create(
         user.email,
@@ -30,6 +30,7 @@ export class UserSeeder {
         user.dni,
         user.birthDate,
         user.parishId,
+        user.phone,
       );
     }
   }

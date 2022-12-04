@@ -19,12 +19,20 @@ export class UserService {
     return this.userRepository.find();
   }
 
+  async findOneById(
+    id: number,
+    withDeleted = false,
+  ): Promise<User | undefined> {
+    return this.userRepository.findOne({ where: { id }, withDeleted });
+  }
+
   async findOneByEmail(
     email: string,
     withDeleted = false,
   ): Promise<User | undefined> {
     return this.userRepository.findOne({ where: { email }, withDeleted });
   }
+
   async findOneByDni(dni: string): Promise<User | undefined> {
     return this.userRepository.findOne({ where: { dni } });
   }
@@ -70,6 +78,7 @@ export class UserService {
     dni: string,
     birthDate: Date,
     parishId: number,
+    phone: string = null,
   ): Promise<User> {
     const user = new User();
     user.email = email;
@@ -79,6 +88,7 @@ export class UserService {
     user.dni = dni;
     user.birthDate = birthDate;
     user.parish = <any>{ id: parishId };
+    user.phone = phone;
     return this.userRepository.save(user);
   }
 

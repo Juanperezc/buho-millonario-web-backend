@@ -22,7 +22,7 @@ const createUserFaker = (
     email: faker.internet.email(),
     password: faker.internet.password(),
     role: RoleEnum.USER,
-    phone: faker.phone.number(),
+    phone: faker.phone.number('+584#########'),
     dni: faker.datatype.number(99999999).toString(),
     birthDate: faker.date.past(),
     parishId: faker.datatype.number({ min: 1, max: 22 }),
