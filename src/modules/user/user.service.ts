@@ -21,19 +21,12 @@ export class UserService {
     );
   }
 
-  async find(userId: number): Promise<User> {
-    return this.userRepository.findOne({ where: { id: userId } });
+  async find(userId: number, withDeleted = false): Promise<User> {
+    return this.userRepository.findOne({ where: { id: userId }, withDeleted });
   }
 
-  async findAll(): Promise<User[]> {
-    return this.userRepository.find();
-  }
-
-  async findOneById(
-    id: number,
-    withDeleted = false,
-  ): Promise<User | undefined> {
-    return this.userRepository.findOne({ where: { id }, withDeleted });
+  async findAll(withDeleted = false): Promise<User[]> {
+    return this.userRepository.find({ withDeleted });
   }
 
   async findOneByEmail(
@@ -78,6 +71,10 @@ export class UserService {
   async closeAccount(userId: number, reasonText: string): Promise<any> {
     this.userRepository.update({ id: userId }, { closedReason: reasonText });
     return this.userRepository.softDelete({ id: userId });
+  }
+  async restoreAccount(userId: number): Promise<any> {
+    this.userRepository.update({ id: userId }, { closedReason: null });
+    return this.userRepository.restore({ id: userId });
   }
 
   async create(

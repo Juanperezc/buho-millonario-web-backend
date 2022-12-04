@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Param, Put, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Put,
+  UseGuards,
+} from '@nestjs/common';
 import { JwtAuthGuard } from '@modules/auth/guards/jwt-auth.guard';
 import { UpdateUserDto } from './dtos/update-user.dto';
 import { UserService } from './user.service';
@@ -10,13 +18,19 @@ export class UserController {
   @Get()
   @UseGuards(JwtAuthGuard)
   getAll() {
-    return this.userService.findAll();
+    return this.userService.findAll(true);
+  }
+
+  @Post('/restore/:id')
+  @UseGuards(JwtAuthGuard)
+  restoreAccount(@Param('id') id: number) {
+    return this.userService.restoreAccount(id);
   }
 
   @Get('/:id')
   @UseGuards(JwtAuthGuard)
   show(@Param('id') id: number) {
-    return this.userService.findOneById(id);
+    return this.userService.find(id, true);
   }
 
   @Put('/:id')

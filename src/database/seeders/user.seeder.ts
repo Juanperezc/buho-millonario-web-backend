@@ -37,7 +37,7 @@ export class UserSeeder {
 
     await this.userService.create(
       'juanl1996@hotmail.com',
-      'prueba',
+      'prueba1234',
       'Juan',
       'Perez',
       '25141826',
@@ -49,7 +49,7 @@ export class UserSeeder {
 
     await this.userService.create(
       'cristzencoff@gmail.com',
-      'prueba',
+      'prueba1234',
       'Shely',
       'Zencoff',
       '23112311',
