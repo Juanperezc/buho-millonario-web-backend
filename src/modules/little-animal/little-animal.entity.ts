@@ -6,6 +6,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { Lottery } from '@modules/lottery/lottery.entity';
 import { Ticket } from '@modules/ticket/ticket.entity';
 
 @Entity()
@@ -18,6 +19,9 @@ export class LittleAnimal {
 
   @Column()
   image: string;
+
+  @OneToMany(() => Lottery, (lottery) => lottery.resultLittleAnimal)
+  resultLotteries: Lottery[];
 
   @OneToMany(() => Ticket, (ticket) => ticket.littleAnimal)
   tickets: Ticket[];

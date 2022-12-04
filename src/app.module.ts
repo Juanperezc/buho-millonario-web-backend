@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { AuthModule } from '@modules/auth/auth.module';
+import { BankAccount } from '@modules/back-account/bank-account.entity';
 import { LittleAnimal } from '@modules/little-animal/little-animal.entity';
 import { LotteryModule } from '@modules/lottery/lottery.module';
 import { MunicipalityModule } from '@modules/municipality/municipality.module';
@@ -22,6 +23,7 @@ import { DatabaseModule } from './database/database.module';
     AuthModule,
     LotteryModule,
     TicketModule,
+    BankAccount,
   ],
   controllers: [AppController],
   providers: [AppService],

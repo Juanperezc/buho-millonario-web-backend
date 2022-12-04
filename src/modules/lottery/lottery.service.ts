@@ -13,4 +13,8 @@ export class LotteryService {
   async findAll(): Promise<Lottery[]> {
     return this.lotteryRepository.find();
   }
+
+  async createLottery(lottery: Lottery): Promise<Lottery> {
+    return this.lotteryRepository.save(lottery);
+  }
 }

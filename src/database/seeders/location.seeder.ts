@@ -35,9 +35,6 @@ export class LocationSeeder {
         }),
       };
     });
-
-    this.logger.debug(jsonData);
-    //this.logger.debug(jsonData);
     for (const state of jsonData) {
       await this.stateService.save(state);
     }

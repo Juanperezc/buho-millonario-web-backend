@@ -7,6 +7,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { LittleAnimal } from '@modules/little-animal/little-animal.entity';
+import { Lottery } from '@modules/lottery/lottery.entity';
 import { User } from '@modules/user/user.entity';
 
 @Entity()
@@ -25,6 +26,9 @@ export class Ticket {
 
   @ManyToOne(() => LittleAnimal, (littleAnimal) => littleAnimal.tickets)
   littleAnimal: LittleAnimal;
+
+  @ManyToOne(() => Lottery, (lottery) => lottery.tickets)
+  lottery: Lottery;
 
   @CreateDateColumn({ name: 'created_at', type: 'timestamp with time zone' })
   createdAt: Date;

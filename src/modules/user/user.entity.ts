@@ -3,13 +3,14 @@ import { Exclude } from 'class-transformer';
 import {
   Column,
   CreateDateColumn,
+  DeleteDateColumn,
   Entity,
-  JoinColumn,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { BankAccount } from '@modules/back-account/bank-account.entity';
 import { Parish } from '@modules/parish/parish.entity';
 import { Ticket } from '@modules/ticket/ticket.entity';
 import { RoleEnum } from './enums/role.enum';
@@ -62,14 +63,28 @@ export class User {
 
   //remember_token
   @Column({ name: 'remember_token', nullable: true })
+  @Exclude({ toPlainOnly: true })
   rememberToken: string;
 
-  @ManyToOne(() => Parish, (parish) => parish.users)
-  @JoinColumn({ name: 'parishId' })
+  @ManyToOne(() => Parish, (parish) => parish.users, {
+    eager: true,
+    onUpdate: 'CASCADE',
+    onDelete: 'CASCADE',
+  })
   parish: Parish;
 
   @OneToMany(() => Ticket, (ticket) => ticket.user)
   tickets: Ticket[];
+
+  @OneToMany(() => BankAccount, (bank_account) => bank_account.user)
+  bank_accounts: BankAccount[];
+
+  @Column({ name: 'closed_reason', nullable: true, default: null })
+  closedReason: string;
+
+  @DeleteDateColumn({ name: 'deleted_at', nullable: true })
+  deletedAt: Date;
+
   @CreateDateColumn({ name: 'created_at', type: 'timestamp with time zone' })
   createdAt: Date;
 

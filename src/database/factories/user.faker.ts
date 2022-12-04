@@ -9,6 +9,9 @@ interface UserFakerInterface {
   password: string;
   role: RoleEnum;
   phone: string;
+  dni: string;
+  birthDate?: Date;
+  parishId;
 }
 const createUserFaker = (
   overrides: Partial<UserFakerInterface> = {},
@@ -20,6 +23,9 @@ const createUserFaker = (
     password: faker.internet.password(),
     role: RoleEnum.USER,
     phone: faker.phone.number(),
+    dni: faker.datatype.number(99999999).toString(),
+    birthDate: faker.date.past(),
+    parishId: faker.datatype.number({ min: 1, max: 22 }),
     ...overrides,
   };
 };

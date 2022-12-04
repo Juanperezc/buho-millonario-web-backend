@@ -18,7 +18,9 @@ export class Municipality {
   @Column()
   name: string;
 
-  @ManyToOne(() => State, (state) => state.municipalities)
+  @ManyToOne(() => State, (state) => state.municipalities, {
+    eager: true,
+  })
   state: State;
 
   @OneToMany(() => Parish, (parish) => parish.municipality, {

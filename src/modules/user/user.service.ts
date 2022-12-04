@@ -19,12 +19,47 @@ export class UserService {
     return this.userRepository.find();
   }
 
-  async findOneByEmail(email: string): Promise<User | undefined> {
-    return this.userRepository.findOne({ where: { email } });
+  async findOneByEmail(
+    email: string,
+    withDeleted = false,
+  ): Promise<User | undefined> {
+    return this.userRepository.findOne({ where: { email }, withDeleted });
   }
-
   async findOneByDni(dni: string): Promise<User | undefined> {
     return this.userRepository.findOne({ where: { dni } });
+  }
+
+  async generateResetPasswordToken(userId: number): Promise<string> {
+    //generate random string
+    const token =
+      Math.random().toString(36).substring(2, 15) +
+      Math.random().toString(36).substring(2, 15);
+    this.userRepository.update({ id: userId }, { rememberToken: token });
+    return token;
+  }
+
+  async validateResetPasswordToken(token: string): Promise<number> {
+    const user = await this.userRepository.findOne({
+      where: { rememberToken: token },
+    });
+    if (user) {
+      return user.id;
+    }
+    return 0;
+  }
+
+  async updatePassword(userId: number, password: string): Promise<any> {
+    const salt = await bcrypt.genSalt();
+    const hashedPassword = await bcrypt.hash(password, salt);
+    return this.userRepository.update(
+      { id: userId },
+      { password: hashedPassword, rememberToken: null },
+    );
+  }
+
+  async closeAccount(userId: number, reasonText: string): Promise<any> {
+    this.userRepository.update({ id: userId }, { closedReason: reasonText });
+    return this.userRepository.softDelete({ id: userId });
   }
 
   async create(
@@ -48,9 +83,18 @@ export class UserService {
   }
 
   async update(id: number, data: any): Promise<any> {
-    // user.parish = <any>{ id: parishId };
     data.parish = <any>{ id: data.parishId };
-    return this.userRepository.update({ id: id }, data);
+    return this.userRepository.update(
+      { id: id },
+      {
+        firstName: data.firstName,
+        lastName: data.lastName,
+        birthDate: data.birthDate,
+        address: data.address,
+        phone: data.phone,
+        parish: data.parish,
+      },
+    );
   }
 
   async save(user: User): Promise<User> {

@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
         database: configService.get('DATABASE_NAME'),
         entities: [__dirname + '../../modules/**/*.entity{.ts,.js}'],
         synchronize: true,
+        namingStrategy: new SnakeNamingStrategy(),
       }),
     }),
   ],
