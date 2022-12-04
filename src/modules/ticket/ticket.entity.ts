@@ -21,13 +21,19 @@ export class Ticket {
   @Column()
   amount: number;
 
-  @ManyToOne(() => User, (user) => user.tickets)
+  @ManyToOne(() => User, (user) => user.tickets, {
+    onDelete: 'CASCADE',
+  })
   user: User;
 
-  @ManyToOne(() => LittleAnimal, (littleAnimal) => littleAnimal.tickets)
+  @ManyToOne(() => LittleAnimal, (littleAnimal) => littleAnimal.tickets, {
+    onDelete: 'CASCADE',
+  })
   littleAnimal: LittleAnimal;
 
-  @ManyToOne(() => Lottery, (lottery) => lottery.tickets)
+  @ManyToOne(() => Lottery, (lottery) => lottery.tickets, {
+    onDelete: 'CASCADE',
+  })
   lottery: Lottery;
 
   @CreateDateColumn({ name: 'created_at', type: 'timestamp with time zone' })

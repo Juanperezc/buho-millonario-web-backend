@@ -23,4 +23,9 @@ export class MunicipalityService {
       },
     });
   }
+  async clear(): Promise<void> {
+    await this.municipalityRepository.query(
+      'TRUNCATE TABLE "municipality" CASCADE',
+    );
+  }
 }

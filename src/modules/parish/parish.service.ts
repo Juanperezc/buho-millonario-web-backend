@@ -23,4 +23,7 @@ export class ParishService {
       },
     });
   }
+  async clear(): Promise<void> {
+    await this.parishRepository.query('TRUNCATE TABLE "parish" CASCADE');
+  }
 }

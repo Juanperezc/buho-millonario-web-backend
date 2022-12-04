@@ -45,7 +45,13 @@ export class Lottery {
   @Column({ default: 50 })
   reward5Digits: number;
 
-  @ManyToOne(() => LittleAnimal, (littleAnimal) => littleAnimal.resultLotteries)
+  @ManyToOne(
+    () => LittleAnimal,
+    (littleAnimal) => littleAnimal.resultLotteries,
+    {
+      onDelete: 'CASCADE',
+    },
+  )
   resultLittleAnimal: LittleAnimal;
 
   @OneToMany(() => Ticket, (ticket) => ticket.lottery)

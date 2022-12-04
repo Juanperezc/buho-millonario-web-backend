@@ -17,4 +17,7 @@ export class StateService {
   async save(state: any): Promise<State> {
     return this.stateRepository.save(state);
   }
+  async clear(): Promise<void> {
+    await this.stateRepository.query('TRUNCATE TABLE "state" CASCADE');
+  }
 }

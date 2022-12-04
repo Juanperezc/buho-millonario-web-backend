@@ -13,4 +13,9 @@ export class BankAccountService {
   async findAll(): Promise<BankAccount[]> {
     return this.bankAccountRepository.find();
   }
+  async clear(): Promise<void> {
+    await this.bankAccountRepository.query(
+      'TRUNCATE TABLE "bank_account" CASCADE',
+    );
+  }
 }

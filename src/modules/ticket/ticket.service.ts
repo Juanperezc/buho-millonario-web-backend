@@ -10,6 +10,9 @@ export class TicketService {
     private ticketRepository: Repository<Ticket>,
   ) {}
 
+  async clear(): Promise<void> {
+    await this.ticketRepository.query('TRUNCATE TABLE "ticket" CASCADE');
+  }
   async findTicketByUser(userId: number): Promise<Ticket[]> {
     return this.ticketRepository.find({
       where: {

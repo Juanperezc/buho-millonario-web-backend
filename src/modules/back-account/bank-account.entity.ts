@@ -30,7 +30,9 @@ export class BankAccount {
   @Column()
   email: string;
 
-  @ManyToOne(() => User, (user) => user.bank_accounts)
+  @ManyToOne(() => User, (user) => user.bank_accounts, {
+    onDelete: 'CASCADE',
+  })
   user: User;
 
   @CreateDateColumn({ name: 'created_at', type: 'timestamp with time zone' })

@@ -19,6 +19,7 @@ export class Parish {
   name: string;
 
   @ManyToOne(() => Municipality, (municipality) => municipality.parishes, {
+    onDelete: 'CASCADE',
     eager: true,
   })
   municipality: Municipality;

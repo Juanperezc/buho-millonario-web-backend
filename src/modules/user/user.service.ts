@@ -11,6 +11,11 @@ export class UserService {
     private userRepository: Repository<User>,
   ) {}
 
+  async clear(): Promise<void> {
+    // query truncate table cascade
+    await this.userRepository.query('TRUNCATE TABLE "user" CASCADE');
+  }
+
   async find(userId: number): Promise<User> {
     return this.userRepository.findOne({ where: { id: userId } });
   }
