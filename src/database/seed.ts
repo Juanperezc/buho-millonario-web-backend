@@ -18,8 +18,8 @@ async function bootstrap() {
       try {
         await clearDb.seed();
         await locationSeeder.seed();
-        await userSeeder.seed();
         await lotterySeeder.seed();
+        await userSeeder.seed();
         logger.debug('Seeding complete!');
       } catch (error) {
         logger.error('Seeding failed!');

@@ -25,5 +25,8 @@ export class ParishService {
   }
   async clear(): Promise<void> {
     await this.parishRepository.query('TRUNCATE TABLE "parish" CASCADE');
+    await this.parishRepository.query(
+      'ALTER SEQUENCE "parish_id_seq" RESTART WITH 1',
+    );
   }
 }

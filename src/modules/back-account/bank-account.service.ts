@@ -17,5 +17,8 @@ export class BankAccountService {
     await this.bankAccountRepository.query(
       'TRUNCATE TABLE "bank_account" CASCADE',
     );
+    await this.bankAccountRepository.query(
+      'ALTER SEQUENCE "bank_account_id_seq" RESTART WITH 1',
+    );
   }
 }

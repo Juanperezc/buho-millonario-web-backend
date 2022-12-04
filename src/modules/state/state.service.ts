@@ -19,5 +19,8 @@ export class StateService {
   }
   async clear(): Promise<void> {
     await this.stateRepository.query('TRUNCATE TABLE "state" CASCADE');
+    await this.stateRepository.query(
+      'ALTER SEQUENCE "state_id_seq" RESTART WITH 1',
+    );
   }
 }

@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as bcrypt from 'bcrypt';
 import { Repository } from 'typeorm';
+import { RoleEnum } from './enums/role.enum';
 import { User } from './user.entity';
 
 @Injectable()
@@ -14,6 +15,10 @@ export class UserService {
   async clear(): Promise<void> {
     // query truncate table cascade
     await this.userRepository.query('TRUNCATE TABLE "user" CASCADE');
+    // query restart sequence
+    await this.userRepository.query(
+      'ALTER SEQUENCE "user_id_seq" RESTART WITH 1',
+    );
   }
 
   async find(userId: number): Promise<User> {
@@ -84,6 +89,7 @@ export class UserService {
     birthDate: Date,
     parishId: number,
     phone: string = null,
+    role = RoleEnum.USER,
   ): Promise<User> {
     const user = new User();
     user.email = email;
@@ -94,6 +100,7 @@ export class UserService {
     user.birthDate = birthDate;
     user.parish = <any>{ id: parishId };
     user.phone = phone;
+    user.role = role;
     return this.userRepository.save(user);
   }
 

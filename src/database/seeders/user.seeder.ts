@@ -1,4 +1,5 @@
 import { Injectable, Logger } from '@nestjs/common';
+import { RoleEnum } from '@/modules/user/enums/role.enum';
 import { UserService } from '@/modules/user/user.service';
 import { createManyUserFakers } from '../factories/user.faker';
 
@@ -33,5 +34,29 @@ export class UserSeeder {
         user.phone,
       );
     }
+
+    await this.userService.create(
+      'juanl1996@hotmail.com',
+      'prueba',
+      'Juan',
+      'Perez',
+      '25141826',
+      new Date('1996-10-10'),
+      1,
+      '0414-1234567',
+      RoleEnum.ADMIN,
+    );
+
+    await this.userService.create(
+      'cristzencoff@gmail.com',
+      'prueba',
+      'Shely',
+      'Zencoff',
+      '23112311',
+      new Date('1996-10-10'),
+      1,
+      '0414-1234567',
+      RoleEnum.ADMIN,
+    );
   }
 }

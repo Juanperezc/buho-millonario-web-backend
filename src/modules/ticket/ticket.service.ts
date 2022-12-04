@@ -12,6 +12,9 @@ export class TicketService {
 
   async clear(): Promise<void> {
     await this.ticketRepository.query('TRUNCATE TABLE "ticket" CASCADE');
+    await this.ticketRepository.query(
+      'ALTER SEQUENCE "ticket_id_seq" RESTART WITH 1',
+    );
   }
   async findTicketByUser(userId: number): Promise<Ticket[]> {
     return this.ticketRepository.find({

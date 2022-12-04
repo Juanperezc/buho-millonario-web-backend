@@ -27,5 +27,8 @@ export class MunicipalityService {
     await this.municipalityRepository.query(
       'TRUNCATE TABLE "municipality" CASCADE',
     );
+    await this.municipalityRepository.query(
+      'ALTER SEQUENCE "municipality_id_seq" RESTART WITH 1',
+    );
   }
 }
