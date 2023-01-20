@@ -1,6 +1,7 @@
 import {
   Column,
   CreateDateColumn,
+  DeleteDateColumn,
   Entity,
   ManyToOne,
   OneToMany,
@@ -24,14 +25,11 @@ export class Lottery {
   @Column({ default: 0 })
   ticketPrice: number;
 
-  @Column({ default: 0 })
-  totalReward: number;
-
   @Column({ nullable: true })
   resultDigits: number;
 
   @Column({ default: 10 })
-  reward1Digit: number;
+  reward1Digits: number;
 
   @Column({ default: 20 })
   reward2Digits: number;
@@ -56,6 +54,15 @@ export class Lottery {
 
   @OneToMany(() => Ticket, (ticket) => ticket.lottery)
   tickets: Ticket[];
+
+  @Column({ name: 'start_date', nullable: true })
+  startDate: Date;
+
+  @Column({ name: 'finish_date', nullable: true })
+  finishDate: Date;
+
+  @DeleteDateColumn({ name: 'deleted_at', nullable: true })
+  deletedAt: Date;
 
   @CreateDateColumn({ name: 'created_at', type: 'timestamp with time zone' })
   createdAt: Date;

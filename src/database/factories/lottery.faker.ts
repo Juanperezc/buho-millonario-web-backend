@@ -5,13 +5,14 @@ interface LotteryFakerInterface {
   title: string;
   description: string;
   ticketPrice: number;
-  totalReward: number;
   resultDigits: number;
-  reward1Digit: number;
+  reward1Digits: number;
   reward2Digits: number;
   reward3Digits: number;
   reward4Digits: number;
   reward5Digits: number;
+  startDate: Date;
+  finishDate: Date;
 }
 const createLotteryFaker = (
   overrides: Partial<LotteryFakerInterface> = {},
@@ -20,13 +21,14 @@ const createLotteryFaker = (
     title: faker.company.name(),
     description: faker.lorem.paragraph(),
     ticketPrice: faker.datatype.number(100),
-    totalReward: faker.datatype.number(1000),
     resultDigits: faker.datatype.number(99999),
-    reward1Digit: faker.datatype.number(100),
-    reward2Digits: faker.datatype.number(100),
-    reward3Digits: faker.datatype.number(100),
-    reward4Digits: faker.datatype.number(100),
-    reward5Digits: faker.datatype.number(100),
+    reward1Digits: faker.datatype.number(10),
+    reward2Digits: faker.datatype.number(20),
+    reward3Digits: faker.datatype.number(30),
+    reward4Digits: faker.datatype.number(40),
+    reward5Digits: faker.datatype.number(50),
+    startDate: faker.date.recent(1),
+    finishDate: faker.date.recent(20),
     ...overrides,
   };
 };
