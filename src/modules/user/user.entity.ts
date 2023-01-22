@@ -12,6 +12,7 @@ import {
 } from 'typeorm';
 import { BankAccount } from '@modules/back-account/bank-account.entity';
 import { Parish } from '@modules/parish/parish.entity';
+import { Recharge } from '@modules/recharge/recharge.entity';
 import { Ticket } from '@modules/ticket/ticket.entity';
 import { RoleEnum } from './enums/role.enum';
 
@@ -75,6 +76,9 @@ export class User {
 
   @OneToMany(() => Ticket, (ticket) => ticket.user)
   tickets: Ticket[];
+
+  @OneToMany(() => Recharge, (recharge) => recharge.user)
+  recharges: Recharge[];
 
   @OneToMany(() => BankAccount, (bank_account) => bank_account.user)
   bank_accounts: BankAccount[];

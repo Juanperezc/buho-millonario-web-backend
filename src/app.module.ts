@@ -5,6 +5,7 @@ import { LittleAnimal } from '@modules/little-animal/little-animal.entity';
 import { LotteryModule } from '@modules/lottery/lottery.module';
 import { MunicipalityModule } from '@modules/municipality/municipality.module';
 import { ParishModule } from '@modules/parish/parish.module';
+import { RechargeModule } from '@modules/recharge/recharge.module';
 import { StateModule } from '@modules/state/state.module';
 import { TicketModule } from '@modules/ticket/ticket.module';
 import { UserModule } from '@modules/user/user.module';
@@ -24,6 +25,7 @@ import { DatabaseModule } from './database/database.module';
     LotteryModule,
     TicketModule,
     BankAccount,
+    RechargeModule,
   ],
   controllers: [AppController],
   providers: [AppService],
