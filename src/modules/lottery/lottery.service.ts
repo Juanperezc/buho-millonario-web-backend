@@ -38,4 +38,11 @@ export class LotteryService {
   async deleteLottery(id: number): Promise<UpdateResult> {
     return this.lotteryRepository.softDelete(id);
   }
+
+  async clear(): Promise<void> {
+    await this.lotteryRepository.query('TRUNCATE TABLE "lottery" CASCADE');
+    await this.lotteryRepository.query(
+      'ALTER SEQUENCE "state_id_seq" RESTART WITH 1',
+    );
+  }
 }

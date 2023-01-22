@@ -58,5 +58,17 @@ export class UserSeeder {
       '0414-1234567',
       RoleEnum.ADMIN,
     );
+
+    await this.userService.create(
+      'shezencoff@gmail.com',
+      'prueba1234',
+      'Shely',
+      'Zencoff',
+      '23112311',
+      new Date('1996-10-10'),
+      1,
+      '0414-1234567',
+      RoleEnum.USER,
+    );
   }
 }

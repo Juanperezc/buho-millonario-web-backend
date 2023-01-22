@@ -1,5 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { BankAccountService } from '@/modules/back-account/bank-account.service';
+import { LotteryService } from '@/modules/lottery/lottery.service';
 import { MunicipalityService } from '@/modules/municipality/municipality.service';
 import { ParishService } from '@/modules/parish/parish.service';
 import { StateService } from '@/modules/state/state.service';
@@ -16,6 +17,7 @@ export class ClearDb {
     private readonly municipalityService: MunicipalityService,
     private readonly parishService: ParishService,
     private readonly ticketService: TicketService,
+    private readonly lotteryService: LotteryService,
   ) {}
   async seed() {
     await this.handle()
@@ -41,5 +43,7 @@ export class ClearDb {
     this.logger.debug('Successfully municipalityService table cleared...');
     await this.stateService.clear();
     this.logger.debug('Successfully stateService table cleared...');
+    await this.lotteryService.clear();
+    this.logger.debug('Successfully lotteryService table cleared...');
   }
 }
