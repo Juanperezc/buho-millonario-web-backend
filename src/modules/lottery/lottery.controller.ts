@@ -23,6 +23,11 @@ export class LotteryController {
     return this.lotteryService.findAll();
   }
 
+  @Get('/active')
+  active() {
+    return this.lotteryService.activeLottery();
+  }
+
   @Get('/:id')
   getLottery(@Param('id') id: number) {
     return this.lotteryService.find(id);

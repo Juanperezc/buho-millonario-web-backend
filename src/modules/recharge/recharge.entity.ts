@@ -14,11 +14,14 @@ export class Recharge {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ default: RechargeTypeEnum.BANK_ACCOUNT })
+  @Column({ default: RechargeTypeEnum.PROVINCIAL })
   type: RechargeTypeEnum;
 
   @Column()
   amount: number;
+
+  @Column({ nullable: true })
+  reference_text: string;
 
   @ManyToOne(() => User, (user) => user.recharges, {
     onDelete: 'CASCADE',

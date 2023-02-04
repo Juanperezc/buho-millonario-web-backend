@@ -21,7 +21,7 @@ const createLotteryFaker = (
     title: faker.company.name(),
     description: faker.lorem.paragraph(),
     ticketPrice: faker.datatype.number(100),
-    resultDigits: faker.datatype.number(99999),
+    resultDigits: Math.random() < 0.5 ? null : faker.datatype.number(99999),
     reward1Digits: faker.datatype.number({ min: 10, max: 20 }),
     reward2Digits: faker.datatype.number({ min: 20, max: 30 }),
     reward3Digits: faker.datatype.number({ min: 30, max: 40 }),

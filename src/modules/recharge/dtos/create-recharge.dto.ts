@@ -9,4 +9,7 @@ export class CreateRechargeDTO {
   @IsNotEmpty()
   @IsNumber()
   amount: number;
+
+  @IsNotEmpty()
+  reference_text: string;
 }

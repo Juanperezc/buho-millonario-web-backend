@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, UpdateResult } from 'typeorm';
+import { IsNull, Repository, UpdateResult } from 'typeorm';
 import { CreateLotteryDTO } from './dtos/create-lottery.dto';
 import { UpdateLotteryDto } from './dtos/update-lottery.dto';
 import { Lottery } from './lottery.entity';
@@ -14,6 +14,15 @@ export class LotteryService {
 
   async findAll(): Promise<Lottery[]> {
     return this.lotteryRepository.find();
+  }
+
+  async activeLottery(): Promise<Lottery[]> {
+    // get all lotteries where startDate is less than now and resultDigits is null
+    return this.lotteryRepository.find({
+      where: {
+        resultDigits: IsNull(),
+      },
+    });
   }
 
   async find(id: number): Promise<Lottery> {

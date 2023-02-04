@@ -13,4 +13,29 @@ export class LittleAnimalService {
   async findAll(): Promise<LittleAnimal[]> {
     return this.littleAnimalRepository.find();
   }
+
+  async create(name: string, image: string): Promise<LittleAnimal> {
+    const littleAnimal = this.littleAnimalRepository.create({
+      name,
+      image,
+    });
+    return this.littleAnimalRepository.save(littleAnimal);
+  }
+
+  async getRandom(): Promise<LittleAnimal> {
+    return this.littleAnimalRepository
+      .createQueryBuilder('littleAnimal')
+      .orderBy('random()')
+      .limit(1)
+      .getOne();
+  }
+
+  async clear(): Promise<void> {
+    await this.littleAnimalRepository.query(
+      'TRUNCATE TABLE "little_animal" CASCADE',
+    );
+    await this.littleAnimalRepository.query(
+      'ALTER SEQUENCE "state_id_seq" RESTART WITH 1',
+    );
+  }
 }

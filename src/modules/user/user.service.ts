@@ -77,6 +77,20 @@ export class UserService {
     return this.userRepository.restore({ id: userId });
   }
 
+  async updateBalance(
+    userId: number,
+    amount: number,
+    type: 'addition' | 'subtraction' = 'addition',
+  ): Promise<any> {
+    const user = await this.find(userId);
+    if (user) {
+      if (type === 'subtraction') user.budget -= amount;
+      else user.budget += amount;
+      return this.userRepository.save(user);
+    }
+    return null;
+  }
+
   async create(
     email: string,
     password: string,

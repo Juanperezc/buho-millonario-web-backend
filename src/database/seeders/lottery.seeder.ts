@@ -21,7 +21,7 @@ export class LotterySeeder {
       });
   }
   async handle() {
-    const lotteries = createManyLotteryFakers(10);
+    const lotteries = createManyLotteryFakers(30);
     for (const lottery of lotteries) {
       const lotteryEntity = new Lottery();
       lotteryEntity.title = lottery.title;
