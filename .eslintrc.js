@@ -50,7 +50,7 @@ module.exports = {
       commonjs: true
     }],
     'import/newline-after-import': 'error',
-
+    'import/no-unresolved': 'off',
     '@typescript-eslint/naming-convention': [
       'error',
       {
