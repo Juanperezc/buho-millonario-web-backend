@@ -28,9 +28,9 @@ export class WinnerTicket {
   amount: number;
 
   @Column({ default: false })
-  isReward: boolean;
+  isClaim: boolean;
 
-  @ManyToOne(() => Ticket, (ticket) => ticket.winnerTickets, {
+  @ManyToOne(() => Ticket, (ticket) => ticket.winnerTicket, {
     onDelete: 'CASCADE',
   })
   ticket: Ticket;

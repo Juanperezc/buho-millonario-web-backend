@@ -1,6 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { IsNull, Repository, UpdateResult } from 'typeorm';
+import { LittleAnimalService } from '@modules/little-animal/little-animal.service';
 import {
   WinnerTicket,
   WinnerTicketType,
@@ -16,6 +17,7 @@ export class LotteryService {
     @InjectRepository(Lottery)
     private lotteryRepository: Repository<Lottery>,
     private winnerTicketService: WinnerTicketService,
+    private littleAnimalService: LittleAnimalService,
   ) {}
 
   async findAll(): Promise<Lottery[]> {
@@ -54,14 +56,32 @@ export class LotteryService {
     return this.lotteryRepository.softDelete(id);
   }
 
-  async finishLottery(id: number, code: number = null): Promise<number> {
+  async finishLottery(
+    id: number,
+    code: number = null,
+    littleAnimalId = 0,
+  ): Promise<number> {
     const lottery = await this.lotteryRepository.findOne({
       relations: ['tickets.user'],
       where: { id },
     });
     const randomCode = code ?? Math.random() * 100000;
+    const resultLittleAnimal = littleAnimalId
+      ? await this.littleAnimalService.find(littleAnimalId)
+      : await this.littleAnimalService.getRandom();
     lottery.resultDigits = randomCode;
-
+    lottery.resultLittleAnimal = resultLittleAnimal;
+    // await this.updateLottery(id, lottery);
+    await this.lotteryRepository.update(
+      {
+        id: id,
+      },
+      {
+        resultDigits: randomCode,
+        resultLittleAnimal: resultLittleAnimal,
+      },
+    );
+    console.log('lottery', lottery);
     //assign prizes
     const tickets = lottery.tickets;
 

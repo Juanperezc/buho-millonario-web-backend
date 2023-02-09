@@ -3,7 +3,7 @@ import {
   CreateDateColumn,
   Entity,
   ManyToOne,
-  OneToMany,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -39,8 +39,8 @@ export class Ticket {
   })
   lottery: Lottery;
 
-  @OneToMany(() => WinnerTicket, (winnerTicket) => winnerTicket.ticket)
-  winnerTickets: WinnerTicket[];
+  @OneToOne(() => WinnerTicket, (winnerTicket) => winnerTicket.ticket)
+  winnerTicket: WinnerTicket;
 
   @Column({ default: true })
   visibility: boolean;

@@ -43,7 +43,7 @@ export class TicketService {
           id: userId,
         },
       },
-      relations: ['littleAnimal', 'winnerTickets'],
+      relations: ['littleAnimal', 'winnerTicket'],
     });
   }
 

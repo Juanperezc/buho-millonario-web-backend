@@ -10,6 +10,14 @@ export class LittleAnimalService {
     private littleAnimalRepository: Repository<LittleAnimal>,
   ) {}
 
+  async find(id: number): Promise<LittleAnimal> {
+    return this.littleAnimalRepository.findOne({
+      where: {
+        id: id,
+      },
+    });
+  }
+
   async findAll(): Promise<LittleAnimal[]> {
     return this.littleAnimalRepository.find();
   }

@@ -51,6 +51,10 @@ export class LotteryController {
 
   @Post('/finish/:id')
   finishLottery(@Param('id') id, @Body() finishLotteryDTO: FinishLotteryDTO) {
-    this.lotteryService.finishLottery(id, finishLotteryDTO.code);
+    this.lotteryService.finishLottery(
+      id,
+      finishLotteryDTO.code,
+      finishLotteryDTO.littleAnimalId,
+    );
   }
 }

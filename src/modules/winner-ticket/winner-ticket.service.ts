@@ -24,7 +24,7 @@ export class WinnerTicketService {
       },
     });
 
-    if (winnerTicket && !winnerTicket.isReward) {
+    if (winnerTicket && !winnerTicket.isClaim) {
       this.userService.updateBalance(
         winnerTicket.ticket.user.id,
         winnerTicket.amount,
@@ -33,7 +33,7 @@ export class WinnerTicketService {
       this.winnerTicketRepository.update(
         { id: id },
         {
-          isReward: true,
+          isClaim: true,
         },
       );
     } else {
