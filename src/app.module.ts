@@ -12,6 +12,7 @@ import { UserModule } from '@modules/user/user.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { DatabaseModule } from './database/database.module';
+import { WinnerTicketModule } from './modules/winner-ticket/winner-ticket.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { DatabaseModule } from './database/database.module';
     TicketModule,
     BankAccount,
     RechargeModule,
+    WinnerTicketModule,
   ],
   controllers: [AppController],
   providers: [AppService],

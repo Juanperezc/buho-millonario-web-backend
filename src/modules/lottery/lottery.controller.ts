@@ -10,6 +10,7 @@ import {
 } from '@nestjs/common';
 import { JwtAuthGuard } from '@modules/auth/guards/jwt-auth.guard';
 import { CreateLotteryDTO } from './dtos/create-lottery.dto';
+import { FinishLotteryDTO } from './dtos/finish-lottery.dto';
 import { UpdateLotteryDto } from './dtos/update-lottery.dto';
 import { LotteryService } from './lottery.service';
 
@@ -46,5 +47,10 @@ export class LotteryController {
   @Delete('/:id')
   deleteLottery(@Param('id') id: number) {
     return this.lotteryService.deleteLottery(id);
+  }
+
+  @Post('/finish/:id')
+  finishLottery(@Param('id') id, @Body() finishLotteryDTO: FinishLotteryDTO) {
+    this.lotteryService.finishLottery(id, finishLotteryDTO.code);
   }
 }

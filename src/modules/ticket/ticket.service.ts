@@ -27,6 +27,15 @@ export class TicketService {
       'ALTER SEQUENCE "ticket_id_seq" RESTART WITH 1',
     );
   }
+
+  async find(id: number): Promise<Ticket> {
+    return this.ticketRepository.findOne({
+      where: {
+        id: id,
+      },
+    });
+  }
+
   async findTicketByUser(userId: number): Promise<Ticket[]> {
     return this.ticketRepository.find({
       where: {
@@ -34,7 +43,7 @@ export class TicketService {
           id: userId,
         },
       },
-      relations: ['littleAnimal'],
+      relations: ['littleAnimal', 'winnerTickets'],
     });
   }
 

@@ -1,7 +1,13 @@
 {
+    "javascript.implicitProjectConfig.experimentalDecorators": true,
     "cSpell.words": [
+        "Decorators",
         "dtos",
-        "movil"
+        "movil",
+        "Ticket",
+        "typeorm",
+        "winner",
+        "Winner"
     ],
     "cSpell.ignorePaths": [
         "src/common/data/**",

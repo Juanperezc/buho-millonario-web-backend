@@ -22,43 +22,43 @@ export class LittleAnimalSeeder {
     const data = [
       {
         name: 'Panda',
-        image: 'https://i.ibb.co/16z9vRB/oso-panda.png',
+        image: 'https://i.imgur.com/9wWmRIs.png',
       },
       {
         name: 'Tigre',
-        image: 'https://i.ibb.co/cL1gX65/tigre.png',
+        image: 'https://i.imgur.com/ZmorAjM.png',
       },
       {
         name: 'Vaca',
-        image: 'https://i.ibb.co/df6NYqY/vaca.png',
+        image: 'https://i.imgur.com/9Ljx3ic.png',
       },
       {
         name: 'Conejo',
-        image: 'https://i.ibb.co/4SJyD0z/conejo.png',
+        image: 'https://i.imgur.com/DhO8Lsl.png',
       },
       {
         name: 'León',
-        image: 'https://i.ibb.co/qn8hzkP/leon.png',
+        image: 'https://i.imgur.com/5gUcRdC.png',
       },
       {
         name: 'Mono',
-        image: 'https://i.ibb.co/1qQ15mh/babuino.png',
+        image: 'https://i.imgur.com/VhgyYXW.png',
       },
       {
         name: 'LLama',
-        image: 'https://i.ibb.co/WzL4ZTQ/alpaca.png',
+        image: 'https://i.imgur.com/VDwPqyq.png',
       },
       {
         name: 'Pantera',
-        image: 'https://i.ibb.co/TRt9xnc/pantera.png',
+        image: 'https://i.imgur.com/eY3jppP.png',
       },
       {
         name: 'Pollo',
-        image: 'https://i.ibb.co/zPTDbBK/pollo.png',
+        image: 'https://i.imgur.com/dLY96Jb.png',
       },
       {
         name: 'Cerdo',
-        image: 'https://i.ibb.co/DK9LXz1/cerdo.png',
+        image: 'https://i.imgur.com/3r8pmiJ.png',
       },
     ];
 
